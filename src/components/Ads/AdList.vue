@@ -5,7 +5,7 @@
         <h1 class="text--secondary mb-3">Мой список</h1>
         <v-card
           class="elevation-10 mb-3"
-          v-for="ad in ads"
+          v-for="ad in myAds"
           :key="ad.id"
         >
           <v-layout row>
@@ -37,24 +37,9 @@
 
 <script>
   export default {
-    data () {
-      return {
-        ads: [
-          {
-            id: 1,
-            title: 'Lamborgini',
-            desc: 'Description',
-            promo: false,
-            imageSrc: 'https://vuetifyjs.com/static/doc-images/carousel/sky.jpg'
-          },
-          {
-            id: 3,
-            title: 'Ferrari',
-            desc: 'Description',
-            promo: true,
-            imageSrc: 'https://vuetifyjs.com/static/doc-images/carousel/bird.jpg'
-          }
-        ]
+    computed: {
+      myAds () {
+        return this.$store.getters.myAds
       }
     }
   }
