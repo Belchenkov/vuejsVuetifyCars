@@ -27,7 +27,9 @@
         class="white--text hidden-md-and-up"
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
-      <v-toolbar-title class="white--text">Vuejs Project</v-toolbar-title>
+      <v-toolbar-title class="white--text">
+        <router-link to="/" tag="span" class="pointer">VueCars Project</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
@@ -67,7 +69,7 @@ export default {
 
 }
 </script>
-<style>
+<style >
   @import url('https://fonts.googleapis.com/css?family=Exo+2:400,700&subset=cyrillic');
 
   .btn__content,
@@ -79,5 +81,9 @@ export default {
 
   .toolbar__title {
     font-size: 20px!important;
+  }
+
+  .pointer {
+    cursor: pointer;
   }
 </style>
