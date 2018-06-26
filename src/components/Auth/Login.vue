@@ -35,6 +35,7 @@
             <v-btn
               color="info"
               @click="onSibmit"
+              :loading="loading"
             >Войти</v-btn>
           </v-card-actions>
         </v-card>
@@ -62,6 +63,11 @@ export default {
       ]
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     onSibmit: function () {
       if (this.$refs.form.validate()) {
@@ -69,7 +75,11 @@ export default {
           email: this.email,
           password: this.password
         }
-        console.log(user)
+        this.$store.dispatch('loginUser', user)
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(() => {})
       }
     }
   }

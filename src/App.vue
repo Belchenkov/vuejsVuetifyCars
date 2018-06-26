@@ -49,6 +49,22 @@
         <router-view></router-view>
       </v-container>
     </v-content>
+
+    <template v-if="error">
+      <v-snackbar
+        :timeout="5000"
+        :bottom=true
+        :multi-line=true
+        color="error"
+        @input="closeError"
+        :value=true
+      >
+        {{error}}
+        <v-btn flat dark @click.native="closeError">Закрыть</v-btn>
+      </v-snackbar>
+    </template>
+
+
   </v-app>
 </template>
 
@@ -65,8 +81,17 @@ export default {
         {title: 'Список', icon: 'list', url: '/list'}
       ]
     }
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  methods: {
+    closeError () {
+      this.$store.dispatch('clearError')
+    }
   }
-
 }
 </script>
 <style >

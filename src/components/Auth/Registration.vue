@@ -94,7 +94,7 @@
             .then(() => {
               this.$router.push('/')
             })
-            .catch(error => console.log(error))
+            .catch(() => {})
         }
       }
     }
