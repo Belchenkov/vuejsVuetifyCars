@@ -44,6 +44,7 @@
             <v-spacer></v-spacer>
             <v-btn
               color="info"
+              :loading="loading"
               @click="onSibmit"
             >Создать аккаунт</v-btn>
           </v-card-actions>
@@ -60,6 +61,7 @@
         passCount: 6,
         email: '',
         confirmPassword: '',
+        password: '',
         valid: '',
         passRules: [
           v => !!v || 'Обязательное поле',
@@ -75,6 +77,11 @@
         ]
       }
     },
+    computed: {
+      loading () {
+        return this.$store.getters.loading
+      }
+    },
     methods: {
       onSibmit: function () {
         if (this.$refs.form.validate()) {
@@ -82,7 +89,12 @@
             email: this.email,
             password: this.password
           }
-          console.log(user)
+
+          this.$store.dispatch('registerUser', user)
+            .then(() => {
+              this.$router.push('/')
+            })
+            .catch(error => console.log(error))
         }
       }
     }

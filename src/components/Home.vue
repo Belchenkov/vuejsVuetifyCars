@@ -10,7 +10,7 @@
               :key="ad.id"
               :src="ad.imageSrc"
               transition="fade"
-              dark="true"
+              dark
               reverse-transition="fade"
             >
               <v-flex class="car-link">
