@@ -28,7 +28,7 @@ export default {
         commit('setLoading', false)
         commit('setError', error.message)
         throw error
-        }
+      }
     },
     async loginUser ({commit}, {email, password}) {
       commit('clearError')
@@ -43,11 +43,21 @@ export default {
         commit('setError', error.message)
         throw error
       }
+    },
+    autoLoginUser ({commit}, payload) {
+      commit('setUser', new User(payload.uid))
+    },
+    logoutUser ({commit}) {
+      fb.auth().signOut()
+      commit('setUser', null)
     }
   },
   getters: {
     user (state) {
       return state.user
+    },
+    isUserLoggedIn (state) {
+      return state.user !== null
     }
   }
 }

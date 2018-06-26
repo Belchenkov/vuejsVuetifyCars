@@ -82,6 +82,11 @@ export default {
           .catch(() => {})
       }
     }
+  },
+  created () {
+    if (this.$route.query['loginError']) {
+      this.$store.dispatch('setError', 'Авторизуйтесь, чтобы зайти на страницу')
+    }
   }
 }
 </script>

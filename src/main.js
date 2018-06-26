@@ -37,5 +37,10 @@ new Vue({
       storageBucket: 'vuetifyguitars.appspot.com',
       messagingSenderId: '266609043792'
     })
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('autoLoginUser', user)
+      }
+    })
   }
 })

@@ -20,6 +20,17 @@
             <v-list-tile-title v-text="link.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+      <v-list-tile
+        @click="onLogout"
+        v-if="isUserLoggedIn"
+      >
+        <v-list-tile-action>
+          <v-icon>exit_to_app</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title v-text="'Выйти'"></v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app color="blue-grey darken-3">
@@ -41,6 +52,15 @@
         >
           <v-icon left>{{ link.icon }}</v-icon>
             {{ link.title }}
+        </v-btn>
+        <v-btn
+          flat
+          class="white--text"
+          @click="onLogout"
+          v-if="isUserLoggedIn"
+        >
+          <v-icon left>exit_to_app</v-icon>
+          Выйти
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -72,24 +92,37 @@
 export default {
   data () {
     return {
-      drawer: false,
-      links: [
-        {title: 'Войти', icon: 'lock', url: '/login'},
-        {title: 'Регистрация', icon: 'face', url: '/registration'},
-        {title: 'Заказы', icon: 'bookmark_border', url: '/orders'},
-        {title: 'Добавить', icon: 'note_add', url: '/new'},
-        {title: 'Список', icon: 'list', url: '/list'}
-      ]
+      drawer: false
     }
   },
   computed: {
     error () {
       return this.$store.getters.error
+    },
+    isUserLoggedIn () {
+      return this.$store.getters.isUserLoggedIn
+    },
+    links () {
+      if (this.isUserLoggedIn) {
+        return [
+          {title: 'Заказы', icon: 'bookmark_border', url: '/orders'},
+          {title: 'Добавить', icon: 'note_add', url: '/new'},
+          {title: 'Список', icon: 'list', url: '/list'}
+        ]
+      }
+      return [
+        {title: 'Войти', icon: 'lock', url: '/login'},
+        {title: 'Регистрация', icon: 'face', url: '/registration'}
+      ]
     }
   },
   methods: {
     closeError () {
       this.$store.dispatch('clearError')
+    },
+    onLogout () {
+      this.$store.dispatch('logoutUser')
+      this.$router.push('/')
     }
   }
 }
