@@ -5,6 +5,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import Vuetify from 'vuetify'
+import * as fb from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify, { theme: {
@@ -25,5 +26,16 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  created () {
+    // Initialize Firebase
+    fb.initializeApp({
+      apiKey: 'AIzaSyAVmuhPgdbNsxV8E0QrFZ5TRq1nd1qYNYY',
+      authDomain: 'vuetifyguitars.firebaseapp.com',
+      databaseURL: 'https://vuetifyguitars.firebaseio.com',
+      projectId: 'vuetifyguitars',
+      storageBucket: 'vuetifyguitars.appspot.com',
+      messagingSenderId: '266609043792'
+    })
+  }
 })
