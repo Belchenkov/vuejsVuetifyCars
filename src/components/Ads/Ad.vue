@@ -30,7 +30,6 @@
     computed: {
       ad () {
         const id = this.id;
-
         return this.$store.getters.adById(id)
       }
     }

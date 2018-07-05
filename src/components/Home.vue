@@ -1,7 +1,8 @@
 <template>
 
   <v-flex>
-    <v-container fluid>
+    <template v-if="!loading">
+      <v-container fluid>
       <v-layout row>
         <v-flex xs12>
           <v-carousel>
@@ -22,42 +23,57 @@
           </v-carousel>
         </v-flex>
       </v-layout>
-    </v-container>
+      </v-container>
 
-    <v-container grid-list-lg>
-      <v-layout row wrap>
-        <v-flex
-          xs12
-          sm6
-          md4
-          v-for="ad of ads"
-          :key="ad.id"
-        >
-          <v-card>
-            <v-card-media
-              :src="ad.imageSrc"
-              height="200px"
-            >
-            </v-card-media>
-            <v-card-title primary-title>
-              <div>
-                <h3 class="headline mb-0">{{ ad.title }}</h3>
-                <div>{{ ad.desc }}</div>
-              </div>
-            </v-card-title>
-            <v-card-actions class="elevation-4">
-              <v-btn
-                raised
-                class="info elevation-7"
-                :to="'/ad/' + ad.id"
-              >Подробнее</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn raised class="success elevation-7">Купить</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
+      <v-container grid-list-lg>
+        <v-layout row wrap>
+          <v-flex
+            xs12
+            sm6
+            md4
+            v-for="ad of ads"
+            :key="ad.id"
+          >
+            <v-card>
+              <v-card-media
+                :src="ad.imageSrc"
+                height="200px"
+              >
+              </v-card-media>
+              <v-card-title primary-title>
+                <div>
+                  <h3 class="headline mb-0">{{ ad.title }}</h3>
+                  <div>{{ ad.desc }}</div>
+                </div>
+              </v-card-title>
+              <v-card-actions class="elevation-4">
+                <v-btn
+                  raised
+                  class="info elevation-7"
+                  :to="'/ad/' + ad.id"
+                >Подробнее</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn raised class="success elevation-7">Купить</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </template>
+    
+    <v-flex v-else>
+      <v-container>
+        <v-layout row>
+            <v-flex class="text-xs-center" pt-5 mt-5 xs12>
+               <v-progress-circular
+                  :size="70"
+                  color="teal darken-4"
+                  indeterminate
+                ></v-progress-circular>
+            </v-flex>
+        </v-layout>
+      </v-container>
+    </v-flex>
   </v-flex>
 
 
@@ -71,6 +87,9 @@
         },
         ads () {
           return this.$store.getters.ads
+        },
+        loading () {
+          return this.$store.getters.loading
         }
       }
     }
