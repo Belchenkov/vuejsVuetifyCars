@@ -19,7 +19,6 @@ export default {
     async registerUser ({commit}, {email, password}) {
       commit('clearError')
       commit('setLoading', true)
-
       try {
         const user = await fb.auth().createUserWithEmailAndPassword(email, password)
         commit('setUser', new User(user.uid))
@@ -33,7 +32,6 @@ export default {
     async loginUser ({commit}, {email, password}) {
       commit('clearError')
       commit('setLoading', true)
-
       try {
         const user = await fb.auth().signInWithEmailAndPassword(email, password)
         commit('setUser', new User(user.uid))

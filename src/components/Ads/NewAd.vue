@@ -53,6 +53,7 @@
             <v-btn
               class="success"
               @click="createAd"
+              :loading="loading"
             >Добавить заказ</v-btn>
           </v-flex>
         </v-layout>
@@ -71,6 +72,11 @@
         valid: false
       }
     },
+    computed: {
+      loading () {
+        return this.$store.getters.loading
+      }
+    },
     methods: {
       createAd () {
         if (this.$refs.form.validate()) {
@@ -82,6 +88,10 @@
           }
 
           this.$store.dispatch('createAd', ad)
+            .then(() => {
+              this.$router.push('/list')
+            })
+            .catch(() => {})
         }
       }
     }
