@@ -1,7 +1,14 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-flex xs12 sm6 offset-sm-3>
+      <v-flex v-if="loading" class="text-xs-center" pt-5 mt-5 xs12>
+        <v-progress-circular
+          :size="70"
+          color="teal darken-4"
+          indeterminate
+        ></v-progress-circular>
+      </v-flex>
+      <v-flex xs12 sm6 offset-sm-3 v-else-if="!loading && orders.length !== 0">
         <h1 class="text--secondary mb-3">Заказы</h1>
         <v-list two-line subheader>
           <v-list-tile
@@ -10,11 +17,11 @@
             :key="order.id"
           >
             <v-list-tile-action>
-              <v-checkbox
+              <!--<v-checkbox
+                color="success"
+                :value="order.done"
                 @change="markDone(order)"
-                :input-value="order.done"
-                color="info"
-              ></v-checkbox>
+              ></v-checkbox>-->
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{ order.name }}</v-list-tile-title>
@@ -30,6 +37,9 @@
           </v-list-tile>
         </v-list>
       </v-flex>
+      <v-flex v-else class="text-xs-center">
+        <h1 class="text--secondary">Список заказов пуст</h1>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -38,21 +48,28 @@
   export default {
     data () {
       return {
-        orders: [
-          {
-            id: '23423',
-            name: 'Name',
-            phone: '8-927-12-34',
-            adId: '123',
-            done: false
-          }
-        ]
+        orderDone: ''
+      }
+    },
+    computed: {
+      loading () {
+        return this.$store.getters.loading
+      },
+      orders () {
+        return this.$store.getters.orders
       }
     },
     methods: {
       markDone (order) {
-        order.done = true
+        this.$store.dispatch('markOrderDone', order.id)
+          .then(() => {
+            order.done = true
+          })
+          .catch(() => {})
       }
+    },
+    created () {
+      this.$store.dispatch('fetchOrders')
     }
   }
 </script>
