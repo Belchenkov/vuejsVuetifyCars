@@ -53,7 +53,7 @@
                   :to="'/ad/' + ad.id"
                 >Подробнее</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn raised class="success elevation-7">Купить</v-btn>
+                <app-buy-modal :ad="ad"></app-buy-modal>
               </v-card-actions>
             </v-card>
           </v-flex>

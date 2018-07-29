@@ -5,8 +5,11 @@ import App from './App'
 import store from './store'
 import router from './router'
 import Vuetify from 'vuetify'
+import BuyModalComponent from '@/components/Shared/BuyModal'
 import * as fb from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
+
+Vue.component('app-buy-modal', BuyModalComponent)
 
 Vue.use(Vuetify, { theme: {
   primary: '#ee44aa',

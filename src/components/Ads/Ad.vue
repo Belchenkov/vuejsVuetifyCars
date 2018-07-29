@@ -17,7 +17,7 @@
               :ad="ad"
               v-if="isOwner"
             ></add-edit-ad-modal>
-            <v-btn class="success elevation-7">Купить</v-btn>
+            <app-buy-modal :ad="ad"></app-buy-modal>
           </v-card-actions>
         </v-card>
 
