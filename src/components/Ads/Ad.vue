@@ -13,12 +13,15 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <add-edit-ad-modal :ad="ad"></add-edit-ad-modal>
+            <add-edit-ad-modal
+              :ad="ad"
+              v-if="isOwner"
+            ></add-edit-ad-modal>
             <v-btn class="success elevation-7">Купить</v-btn>
           </v-card-actions>
         </v-card>
 
-        <v-flex v-else class="text-xs-center"  pt-5 mt-5 xs12>
+        <v-flex v-else class="text-xs-center" pt-5 mt-5 xs12>
           <v-progress-circular
             :size="70"
             color="teal darken-4"
@@ -42,11 +45,14 @@
     },
     computed: {
       ad () {
-        const id = this.id;
+        const id = this.id
         return this.$store.getters.adById(id)
       },
       loading () {
         return this.$store.getters.loading
+      },
+      isOwner () {
+        return this.ad.ownerId === this.$store.getters.user.id
       }
     }
   }
