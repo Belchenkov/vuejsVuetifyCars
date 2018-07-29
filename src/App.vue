@@ -83,8 +83,6 @@
         <v-btn flat dark @click.native="closeError">Закрыть</v-btn>
       </v-snackbar>
     </template>
-
-
   </v-app>
 </template>
 

@@ -60,7 +60,7 @@
         </v-layout>
       </v-container>
     </template>
-    
+
     <v-flex v-else>
       <v-container>
         <v-layout row>

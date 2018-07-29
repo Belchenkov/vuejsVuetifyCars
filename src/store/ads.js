@@ -45,8 +45,7 @@ export default {
           '',
           payload.promo
         )
-       
-        const ad = await fb.database().ref('guitars').push(newAd)
+        const ad = await fb.database().ref('ads').push(newAd)
         const imageExt = image.name.slice(image.name.lastIndexOf('.'))
 
         const fileData = await fb.storage().ref(`ads/${ad.key}.${imageExt}`).put(image)
@@ -76,7 +75,7 @@ export default {
       const resultAds = []
 
       try {
-        const fbVal = await fb.database().ref('guitars').once('value')
+        const fbVal = await fb.database().ref('ads').once('value')
         const guitars = fbVal.val()
 
         Object.keys(guitars).forEach(key => {
