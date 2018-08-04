@@ -37,7 +37,7 @@
             <v-card>
               <v-card-media
                 :src="ad.imageSrc"
-                height="200px"
+                height="150px"
               >
               </v-card-media>
               <v-card-title primary-title>

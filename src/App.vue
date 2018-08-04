@@ -38,8 +38,11 @@
         class="white--text hidden-md-and-up"
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
+      <img class="ml-5" src="../logo.png" height="40px" alt="">
       <v-toolbar-title class="white--text">
-        <router-link to="/" tag="span" class="pointer">VueCars Project</router-link>
+        <router-link to="/" tag="span" class="pointer">
+          Guitars PRO
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
